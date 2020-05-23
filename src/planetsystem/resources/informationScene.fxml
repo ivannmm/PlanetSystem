@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planetsystem.controllers.ISController">
+   <children>
+      <ImageView layoutX="698.0" layoutY="10.0">
+         <image>
+            <Image url="https://i.imgur.com/imqVmwb.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="48.0" layoutY="42.0" prefHeight="42.0" prefWidth="365.0" style="-fx-background-image: url(https://i.imgur.com/5AzoLxL.gif); " text="информация о планете" textFill="#a4a4a4">
+         <font>
+            <Font name="Verdana Pro Cond" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="107.0" prefHeight="19.0" prefWidth="79.0" text="название" textFill="#868686">
+         <font>
+            <Font name="Verdana Pro Cond" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="142.0" prefHeight="37.0" prefWidth="232.0" text="минимальное расстояние до солнца &#10;(10^9 м)" textFill="#868686">
+         <font>
+            <Font name="Verdana Pro Cond" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="176.0" prefHeight="50.0" prefWidth="318.0" text="эксцентриситет орбиты &#10;(наведите для подсказки)" textFill="#868686" wrapText="true">
+         <font>
+            <Font name="Verdana Pro Cond" size="14.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="В зависимости от эксцентриситета, получится: при &lt;1 — эллипс; для окружности полагают = 0.&#10;Чем ближе эксцентриситет к единице, тем малая полуось становится все меньше и меньше." textAlignment="JUSTIFY" wrapText="true" x="100.0" y="100.0">
+               <font>
+                  <Font name="Verdana Pro Cond" size="12.0" />
+               </font></Tooltip>
+         </tooltip>
+      </Label>
+   </children>
+</AnchorPane>
