@@ -1,12 +1,11 @@
 package planetsystem.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
-public class Model {
+public class Model extends ListResourceBundle {
 
-    public Map<Integer, Planet> dataBase = new HashMap<>();
+    public List< Planet> dataBase = new ArrayList<>();
     int i = 1;
 
     double sunMass;
@@ -15,6 +14,7 @@ public class Model {
     String systemName;
     String sunName;
     double bigHalfShaft;
+    int numberOfThisPlanet = 1;
 
 
     public void setSunName (String sunName) {
@@ -44,6 +44,14 @@ public class Model {
             case "10 лет": this.scaleTime = 311040000;
                 break;
         }
+    }
+
+    public void setNumberOfThisPlanet (int numberOfThisPlanet) {
+        this.numberOfThisPlanet = numberOfThisPlanet;
+    }
+
+    public int getNumberOfThisPlanet () {
+        return numberOfThisPlanet;
     }
 
     public void setPlanetCount (int planetCount) {
@@ -81,8 +89,13 @@ public class Model {
                 / (6.67 * sunMass));
 
         Planet planet = new Planet(name, radius, period, eccentricity, this);
-        dataBase.put(i, planet);
+        dataBase.add(planet);
         i++;
 
+    }
+
+    @Override
+    protected Object[][] getContents() {
+        return new Object[0][];
     }
 }

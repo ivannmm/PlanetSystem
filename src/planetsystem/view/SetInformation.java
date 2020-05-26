@@ -10,27 +10,23 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
+import planetsystem.controllers.InfAboutPlanetsController;
+import planetsystem.controllers.InfAboutSunController;
 import planetsystem.model.Model;
 
 import java.io.IOException;
 
 public class SetInformation {
 
+    Stage stage;
+    Model model;
 
-    public void setDataAboutSun(Stage stage, Model model) throws IOException {
+    public SetInformation(Stage stage, Model model) {
+        this.stage = stage;
+        this.model = model;
+    }
 
-        Button continueButton = new Button();
-        continueButton.setText("Продолжить");
-        continueButton.setLayoutX(782);
-        continueButton.setLayoutY(361);
-
-        TextField sunName = new TextField();
-        sunName.setLayoutX(289);
-        sunName.setLayoutY(104);
-
-        TextField mass = new TextField();
-        mass.setLayoutX(289);
-        mass.setLayoutY(149);
+    public void setDataAboutSun() throws IOException {
 
         stage.setTitle("Информация о звезде");
 
@@ -41,32 +37,19 @@ public class SetInformation {
                 CycleMethod.NO_CYCLE, stops);
         theScene.setFill(gradient);
 
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("../resources/informationAboutSun.fxml")));
-        root.getChildren().add(continueButton);
-        root.getChildren().add(sunName);
-        root.getChildren().add(mass);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/informationAboutSun.fxml"));
+        root.getChildren().add(loader.load());
 
-        continueButton.setOnAction(event -> {
-                if (!sunName.getText().isEmpty() && Main.isNumber(mass.getText())) {
-                    model.setSunMass(Double.parseDouble(mass.getText()));
-                    model.setSunName(sunName.getText());
-                    try {
-                        setDataAboutPlanets(stage, model);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Main.showMessage(stage.getScene().getWindow(), "Обязательно нужно указать название звезды, " +
-                            "и массу звезды (число)" );
-                }
-            }
-        );
+        InfAboutSunController controller = loader.getController();
+        controller.setModel(model);
+        controller.setClass(this);
+        controller.setStage(stage);
+
         stage.setScene(theScene);
     }
 
-    private int i = 1;
 
-    public void setDataAboutPlanets(Stage stage, Model model) throws Exception {
+    public void setDataAboutPlanets() throws Exception {
         Group root = new Group();
         Scene theScene = new Scene(root);
 
@@ -75,54 +58,16 @@ public class SetInformation {
                 CycleMethod.NO_CYCLE, stops);
         theScene.setFill(gradient);
 
-        root.getChildren().add(FXMLLoader.load(getClass().getResource(
-                "../resources/informationScene.fxml")));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/informationAboutPlanet.fxml"));
+        root.getChildren().add(loader.load());
+        InfAboutPlanetsController controller = loader.getController();
 
-        Button continueButton = new Button();
-        continueButton.setText("Продолжить");
-        continueButton.setLayoutX(782);
-        continueButton.setLayoutY(361);
+        controller.setClass(this);
+        controller.setModel(model);
+        controller.setStage(stage);
 
-        TextField planetsName = new TextField();
-        planetsName.setLayoutX(289);
-        planetsName.setLayoutY(104);
+        stage.setTitle("Сбор информации: " + model.getNumberOfThisPlanet() + "/" + model.getPlanetCount());
 
-        TextField radius = new TextField();
-        radius.setLayoutX(289);
-        radius.setLayoutY(149);
-
-        TextField eccentricity = new TextField();
-        eccentricity.setLayoutX(289);
-        eccentricity.setLayoutY(192);
-
-        root.getChildren().add(continueButton);
-        root.getChildren().add(planetsName);
-        root.getChildren().add(radius);
-        root.getChildren().add(eccentricity);
-
-        stage.setTitle("Сбор информации: " + i + "/" + model.getPlanetCount());
-
-        continueButton.setOnAction(event -> {
-            if (!planetsName.getText().isEmpty() && Main.isNumber(radius.getText())
-                    && Main.isNumber(eccentricity.getText())) {
-                    model.addPlanet(planetsName.getText(), Integer.parseInt(radius.getText()),
-                            Double.parseDouble(eccentricity.getText()));
-                if (i < model.getPlanetCount()) {
-                        i++;
-                        try {
-                            setDataAboutPlanets(stage, model);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                } else {
-                    DrawPlanet DP = new DrawPlanet();
-                    DP.drawPlanet(stage, model);
-                }
-            } else {
-                Main.showMessage(stage.getScene().getWindow(), "Обязательно нужно указать название планеты, " +
-                        "минимальное расстояние до солнца (число) и массу планеты (число)" );
-                }
-        });
         stage.setScene(theScene);
     }
 
