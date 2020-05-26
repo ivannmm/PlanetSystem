@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Model extends ListResourceBundle {
 
-    public List< Planet> dataBase = new ArrayList<>();
+    public List<Planet> dataBase = new ArrayList<>();
     int i = 1;
 
     double sunMass;

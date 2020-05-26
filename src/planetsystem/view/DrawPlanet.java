@@ -66,19 +66,19 @@ public class DrawPlanet {
                          * которая дальше используется для вычисление относительной малой полуоси
                          */
 
-                        int x = (int) (model.dataBase.get(i).bigHalfShaft / model.getMaxBigHalfShaft() * 240 * Math.sin(currentAngle[i - 1]) +
-                                (stage.getWidth() / 2 - model.dataBase.get(i).focus));
+                        int x = (int) (model.dataBase.get(i - 1).bigHalfShaft / model.getMaxBigHalfShaft() * 240 * Math.sin(currentAngle[i - 1]) +
+                                (stage.getWidth() / 2 - model.dataBase.get(i - 1).focus));
 
                         /** координата y вычисляется как
                          * большая полуось * кв. корень из (1 - (эксцентриситет орбиты)^2) * текущий угол +
                          * + высота сцены / 2
                          */
 
-                        int y = (int) ((model.dataBase.get(i).bigHalfShaft / model.getMaxBigHalfShaft() * 240) *
-                                Math.sqrt(1 - Math.pow(model.dataBase.get(i).getEccentricity(), 2)) *
+                        int y = (int) ((model.dataBase.get(i - 1).bigHalfShaft / model.getMaxBigHalfShaft() * 240) *
+                                Math.sqrt(1 - Math.pow(model.dataBase.get(i - 1).getEccentricity(), 2)) *
                                 Math.cos(currentAngle[i - 1]) + (stage.getHeight() / 2));
 
-                        currentAngle[i - 1] += 2 * Math.PI / (model.dataBase.get(i).getPeriod() * 60 /
+                        currentAngle[i - 1] += 2 * Math.PI / (model.dataBase.get(i - 1).getPeriod() * 60 /
                                 model.getScaleTime());
 
                         if (currentAngle[i - 1] >= 2 * Math.PI)
