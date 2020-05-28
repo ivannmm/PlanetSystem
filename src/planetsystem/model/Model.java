@@ -3,7 +3,7 @@ package planetsystem.model;
 import java.util.*;
 
 
-public class Model extends ListResourceBundle {
+public class Model {
 
     public List<Planet> dataBase = new ArrayList<>();
     int i = 1;
@@ -15,10 +15,23 @@ public class Model extends ListResourceBundle {
     String sunName;
     double bigHalfShaft;
     int numberOfThisPlanet = 1;
+    boolean stopFlag = false;
+    int showOrbitsFlag;
+
+    String[] atmosphere = {"без атмосферы", "с атмосферой", "со слабой атмосферой"};
+    String[] climate = {"климат, непригодный для жизни, большой разброс температур", "климат, схожий" +
+            "с земным", "климат, непригодный для жизни, слишком много солнечной радиации"};
+    String[] conditions = {"вода занимает большую часть поверхности планеты", "вода занимает" +
+            "меньшую часть поверхности планеты", "планета не содержит воды в жидком виде", "планета не" +
+            "содержит воды ни в каком-либо виде", "газовая планета"};
 
 
     public void setSunName (String sunName) {
         this.sunName = sunName;
+    }
+
+    public void setShowOrbitsFlag (int showOrbitsFlag) {
+        this.showOrbitsFlag = showOrbitsFlag;
     }
 
     public void setSunMass (double sunMass) {
@@ -50,8 +63,8 @@ public class Model extends ListResourceBundle {
         this.numberOfThisPlanet = numberOfThisPlanet;
     }
 
-    public int getNumberOfThisPlanet () {
-        return numberOfThisPlanet;
+    public void changeStopFlag() {
+        this.stopFlag = !this.stopFlag;
     }
 
     public void setPlanetCount (int planetCount) {
@@ -62,7 +75,7 @@ public class Model extends ListResourceBundle {
         this.systemName = systemName;
     }
 
-    public void setBigHalfShaft (double bigHalfShaft) {
+    public void setMaxBigHalfShaft (double bigHalfShaft) {
         this.bigHalfShaft = bigHalfShaft;
     }
 
@@ -82,20 +95,36 @@ public class Model extends ListResourceBundle {
         return scaleTime;
     }
 
+    public int getShowOrbitsFlag() {
+        return showOrbitsFlag;
+    }
+
+    public boolean getStopFlag() {
+        return stopFlag;
+    };
+    public int getNumberOfThisPlanet () {
+        return numberOfThisPlanet;
+    }
+
 
     public void addPlanet(String name, long radius, double eccentricity) {
 
         double period = 2 * Math.PI * Math.sqrt((Math.pow(radius,3) * Math.pow(10,8))
                 / (6.67 * sunMass));
 
-        Planet planet = new Planet(name, radius, period, eccentricity, this);
+        Planet planet = new Planet(name, radius, period, eccentricity, this, atmosphere);
         dataBase.add(planet);
         i++;
 
     }
 
-    @Override
-    protected Object[][] getContents() {
-        return new Object[0][];
+    public int getX (int planetNumber, double angle, double coef) {
+        return (int) (coef * 240 * Math.sin(angle) + (550 - dataBase.get(planetNumber).bigHalfShaft /
+                getMaxBigHalfShaft() * 240 * dataBase.get(planetNumber).getEccentricity()));
+    }
+
+    public int getY(int planetNumber, double angle, double coef) {
+        return (int) ((coef * 240) * Math.sqrt(1 - Math.pow(dataBase.get(planetNumber).getEccentricity(), 2))
+                * Math.cos(angle) + 275);
     }
 }

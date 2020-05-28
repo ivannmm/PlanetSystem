@@ -2,9 +2,10 @@ package planetsystem.model;
 
 public class Planet {
     String name;
-    double radius;
+    double periFocus;
     double period;
     double eccentricity;
+    String[] description;
 
     public int bigHalfShaft;
 
@@ -14,8 +15,8 @@ public class Planet {
         return name;
     }
 
-    public double getRadius() {
-        return radius;
+    public double getPeriFocus() {
+        return periFocus;
     }
 
     public double getPeriod() {
@@ -26,15 +27,21 @@ public class Planet {
         return eccentricity;
     }
 
-    public Planet(String name, double radius, double period, double eccentricity, planetsystem.model.Model model) {
+    public String[] getDescription() {
+        return description;
+    }
+
+    public Planet(String name, double radius, double period, double eccentricity, Model model,
+                  String[] description) {
         this.name = name;
-        this.radius = radius;
+        this.periFocus = radius;
         this.period = period;
         this.eccentricity = eccentricity;
         this.focus = (int) (eccentricity * radius / (1 - eccentricity));
-        this.bigHalfShaft = (int) (radius + focus);
+        this.bigHalfShaft = (int) (periFocus / (1 - eccentricity));
+        this.description = description;
 
         if (model.getMaxBigHalfShaft() < bigHalfShaft)
-            model.setBigHalfShaft(bigHalfShaft);
+            model.setMaxBigHalfShaft(bigHalfShaft);
     }
 }

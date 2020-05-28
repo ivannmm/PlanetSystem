@@ -37,9 +37,14 @@ public class InfAboutSunController {
 
     public void nextScene() throws Exception {
         if (!sunName.getText().isEmpty() && Main.isNumber(mass.getText())) {
-            model.setSunMass(Double.parseDouble(mass.getText()));
-            model.setSunName(sunName.getText());
-            SI.setDataAboutPlanets();
+            if (Double.parseDouble(mass.getText()) > 0) {
+                model.setSunMass(Double.parseDouble(mass.getText()));
+                model.setSunName(sunName.getText());
+                SI.setDataAboutPlanets();
+            } else {
+                Main.showMessage(stage.getScene().getWindow(), "Масса звезды должна быть выражена числом " +
+                        "положительным");
+            }
         } else {
             Main.showMessage(stage.getScene().getWindow(), "Обязательно нужно указать название звезды, " +
                     "и массу звезды (число)");
