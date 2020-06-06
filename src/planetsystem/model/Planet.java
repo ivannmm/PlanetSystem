@@ -37,8 +37,8 @@ public class Planet {
         this.periFocus = radius;
         this.period = period;
         this.eccentricity = eccentricity;
-        this.focus = (int) (eccentricity * radius / (1 - eccentricity));
         this.bigHalfShaft = (int) (periFocus / (1 - eccentricity));
+        this.focus = (int) (bigHalfShaft * eccentricity);
         this.description = description;
 
         if (model.getMaxBigHalfShaft() < bigHalfShaft)

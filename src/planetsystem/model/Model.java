@@ -133,7 +133,7 @@ public class Model {
 
     public int getX (int planetNumber, double angle, double coef) {
         return (int) (coef * 240 * Math.sin(angle) + (550 - dataBase.get(planetNumber).bigHalfShaft /
-                getMaxBigHalfShaft() * 240 * dataBase.get(planetNumber).getEccentricity()));
+              getMaxBigHalfShaft() * 240 * dataBase.get(planetNumber).getEccentricity()));
     }
 
     public int getY(int planetNumber, double angle, double coef) {

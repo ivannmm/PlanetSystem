@@ -51,6 +51,7 @@ public class DrawPlanet {
         for (int i = 0; i < model.getPlanetCount(); i++) {
 
             int numberOfColor = random.nextInt(7);
+
             coefficient[i] = model.dataBase.get(i).bigHalfShaft / model.getMaxBigHalfShaft();
             circles[i] = new Circle(5 + random.nextInt(5), colors[numberOfColor]);
 
@@ -73,6 +74,8 @@ public class DrawPlanet {
         controller.setModel(model);
 
         root.getChildren().addAll(circles);
+
+        showMessage(stage.getScene().getWindow(), "Для отображения информации о платене, нажмите на нее");
 
         new AnimationTimer() {
             final double[] currentAngle = new double[model.getPlanetCount()];

@@ -20,8 +20,6 @@ public class Main extends Application {
 
     Model model = new Model();
 
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -54,7 +52,7 @@ public class Main extends Application {
         alert.initOwner(window);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
+        alert.show();
     }
 
     public static boolean isInteger(String s) {
