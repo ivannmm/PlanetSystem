@@ -37,7 +37,7 @@ public class SetInformation {
                 CycleMethod.NO_CYCLE, stops);
         theScene.setFill(gradient);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/informationAboutSun.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/informationAboutSun.fxml"));
         root.getChildren().add(loader.load());
 
         InfAboutSunController controller = loader.getController();
@@ -58,7 +58,7 @@ public class SetInformation {
                 CycleMethod.NO_CYCLE, stops);
         theScene.setFill(gradient);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/informationAboutPlanet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/informationAboutPlanet.fxml"));
         root.getChildren().add(loader.load());
         InfAboutPlanetsController controller = loader.getController();
 

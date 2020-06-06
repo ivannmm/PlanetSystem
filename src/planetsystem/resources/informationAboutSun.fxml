@@ -10,10 +10,10 @@
    <children>
       <ImageView layoutX="698.0" layoutY="10.0">
          <image>
-            <Image url="https://i.imgur.com/imqVmwb.png" />
+            <Image url="/stars.png" />
          </image>
       </ImageView>
-      <Label layoutX="48.0" layoutY="43.0" prefHeight="47.0" prefWidth="345.0" style="-fx-background-image: url(https://i.imgur.com/5AzoLxL.gif); " text="информация о звезде" textFill="#a4a4a4">
+      <Label layoutX="48.0" layoutY="43.0" prefHeight="47.0" prefWidth="345.0" style="-fx-background-image: url(/shadow.gif); " text="информация о звезде" textFill="#a4a4a4">
          <font>
             <Font name="Verdana Pro Cond" size="35.0" />
          </font>
@@ -23,7 +23,7 @@
             <Font name="Verdana Pro Cond" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="48.0" layoutY="147.0" prefHeight="29.0" prefWidth="226.0" text="масса (10^30кг)" textFill="#868686">
+      <Label layoutX="48.0" layoutY="149.0" prefHeight="82.0" prefWidth="226.0" text="масса (10^30) кг&#10;**для сравнения&#10;   масса Солнца &#10;   равна  2 * (10^30) кг" textFill="#868686">
          <font>
             <Font name="Verdana Pro Cond" size="14.0" />
          </font>

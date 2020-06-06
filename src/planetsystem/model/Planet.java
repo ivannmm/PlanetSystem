@@ -5,7 +5,7 @@ public class Planet {
     double periFocus;
     double period;
     double eccentricity;
-    String[] description;
+    public String[] description;
 
     public int bigHalfShaft;
 

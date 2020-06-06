@@ -28,7 +28,7 @@ public class Main extends Application {
         primaryStage.setTitle("Planet System");
         primaryStage.setWidth(900);
         primaryStage.setHeight(450);
-        primaryStage.getIcons().add(new Image("https://pngimg.com/uploads/earth/earth_PNG10.png"));
+        primaryStage.getIcons().add(new Image("/forIcons.png"));
 
         Group root = new Group();
         Scene theScene = new Scene(root);
@@ -37,7 +37,7 @@ public class Main extends Application {
                 CycleMethod.NO_CYCLE, stops);
         theScene.setFill(gradient);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/primaryInformation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/primaryInformation.fxml"));
         root.getChildren().add(loader.load());
         PrimaryController primaryController = loader.getController();
 
@@ -57,7 +57,16 @@ public class Main extends Application {
         alert.showAndWait();
     }
 
-    public static boolean isNumber(String s) {
+    public static boolean isInteger(String s) {
+        try {
+            double i = Integer.parseInt(s);
+        } catch (NumberFormatException | NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isDouble(String s) {
         try {
             double i = Double.parseDouble(s);
         } catch (NumberFormatException | NullPointerException e) {

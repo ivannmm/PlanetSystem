@@ -7,6 +7,8 @@ import planetsystem.model.Model;
 import planetsystem.view.Main;
 import planetsystem.view.SetInformation;
 
+import static planetsystem.view.Main.isDouble;
+
 
 public class InfAboutSunController {
 
@@ -23,31 +25,28 @@ public class InfAboutSunController {
 
     SetInformation SI;
 
-    public void setModel (Model model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 
-    public void setClass (SetInformation SI) {
+    public void setClass(SetInformation SI) {
         this.SI = SI;
     }
 
-    public void setStage (Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     public void nextScene() throws Exception {
-        if (!sunName.getText().isEmpty() && Main.isNumber(mass.getText())) {
+        if (!sunName.getText().isEmpty() && isDouble(mass.getText()) && Double.parseDouble(mass.getText()) > 0) {
             if (Double.parseDouble(mass.getText()) > 0) {
                 model.setSunMass(Double.parseDouble(mass.getText()));
                 model.setSunName(sunName.getText());
                 SI.setDataAboutPlanets();
             } else {
-                Main.showMessage(stage.getScene().getWindow(), "Масса звезды должна быть выражена числом " +
-                        "положительным");
+                Main.showMessage(stage.getScene().getWindow(), "Обязательно нужно указать название звезды, " +
+                        "и массу звезды (число положительное) ");
             }
-        } else {
-            Main.showMessage(stage.getScene().getWindow(), "Обязательно нужно указать название звезды, " +
-                    "и массу звезды (число)");
         }
     }
 }

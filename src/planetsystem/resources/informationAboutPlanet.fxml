@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -10,10 +9,10 @@
    <children>
       <ImageView layoutX="698.0" layoutY="10.0">
          <image>
-            <Image url="https://i.imgur.com/imqVmwb.png" />
+            <Image url="/stars.png" />
          </image>
       </ImageView>
-      <Label layoutX="48.0" layoutY="42.0" prefHeight="42.0" prefWidth="365.0" style="-fx-background-image: url(https://i.imgur.com/5AzoLxL.gif); " text="информация о планете" textFill="#a4a4a4">
+      <Label layoutX="48.0" layoutY="42.0" prefHeight="42.0" prefWidth="365.0" style="-fx-background-image: url(/shadow.gif); " text="информация о планете" textFill="#a4a4a4">
          <font>
             <Font name="Verdana Pro Cond" size="35.0" />
          </font>
@@ -44,5 +43,9 @@
       <TextField fx:id="planetsName" layoutX="280.0" layoutY="104.0" />
       <TextField fx:id="radius" layoutX="280.0" layoutY="142.0" />
       <TextField fx:id="eccentricity" layoutX="280.0" layoutY="189.0" />
+      <Label layoutX="60.0" layoutY="343.0" prefHeight="62.0" prefWidth="399.0" text="**рекомендуется вводить соразмерный радиус, &#10;   то есть максимальный радиус должен быть в десять раз (или менее) &#10;   больше минимального, но никак не больше" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Verdana Pro Cond" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>

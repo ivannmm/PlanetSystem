@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planetsystem.controllers.ShowInformationController">
+   <children>
+      <Button layoutX="315.0" layoutY="230.0" mnemonicParsing="false" onAction="#closeStage" text="Закрыть" />
+      <Label layoutX="8.0" layoutY="6.0" text="Название планеты :" />
+      <Label layoutX="8.0" layoutY="42.0" text="Атмосфера:" />
+      <Label layoutX="8.0" layoutY="77.0" text="Климат:" />
+      <Label layoutX="8.0" layoutY="110.0" text="Условия:" />
+      <Label layoutX="8.0" layoutY="145.0" text="Период обращения вокруг звезды:" />
+      <Label layoutX="8.0" layoutY="180.0" text="Перигелий:" />
+      <Label layoutX="8.0" layoutY="213.0" text="Афелий:" />
+   </children>
+</AnchorPane>

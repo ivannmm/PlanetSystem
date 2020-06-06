@@ -11,8 +11,7 @@ import planetsystem.view.SetInformation;
 
 import java.io.IOException;
 
-import static planetsystem.view.Main.isNumber;
-import static planetsystem.view.Main.showMessage;
+import static planetsystem.view.Main.*;
 
 public class PrimaryController {
 
@@ -42,8 +41,8 @@ public class PrimaryController {
 
     @FXML
     void nextScene() throws IOException {
-        if (isNumber(planetCount.getText()) && !systemName.getText().isEmpty()
-                && scaleTime.getValue() != null) {
+        if (isInteger(planetCount.getText()) && !systemName.getText().isEmpty() && scaleTime.getValue() != null
+        && Integer.parseInt(planetCount.getText()) > 0) {
             SetInformation IAS = new SetInformation(stage, model);
             model.setPlanetCount(Integer.parseInt(planetCount.getText()));
             model.setSystemName(systemName.getText());
@@ -52,7 +51,7 @@ public class PrimaryController {
         }
         else {
             showMessage(stage.getScene().getWindow(),
-                    "Обязательно нужно указать количество планет (цифрой или числом), " +
+                    "Обязательно нужно указать количество планет (целой цифрой или целым числом), " +
                             "название планетарной системы и выбрать масштаб времени");
         }
     }

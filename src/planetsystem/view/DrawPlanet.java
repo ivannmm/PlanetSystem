@@ -6,22 +6,33 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import planetsystem.controllers.ButtonsOnDrawController;
+import planetsystem.controllers.ShowInformationController;
 import planetsystem.model.Model;
+import planetsystem.model.Planet;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
+
+import static planetsystem.view.Main.showMessage;
+import static planetsystem.view.ShowInformationAboutPlanet.show;
 
 public class DrawPlanet {
 
     public void drawPlanet (Stage stage, Model model) throws IOException {
+
         stage.setWidth(1100);
-        stage.setHeight(550);
+        stage.setHeight(560);
         stage.setTitle("Моделирование системы: " + model.getSystemName());
 
         Color[] colors =
@@ -38,6 +49,7 @@ public class DrawPlanet {
         Double[] coefficient = new Double[model.getPlanetCount()];
 
         for (int i = 0; i < model.getPlanetCount(); i++) {
+
             int numberOfColor = random.nextInt(7);
             coefficient[i] = model.dataBase.get(i).bigHalfShaft / model.getMaxBigHalfShaft();
             circles[i] = new Circle(5 + random.nextInt(5), colors[numberOfColor]);
@@ -52,32 +64,44 @@ public class DrawPlanet {
             orbits[i].setFill(Color.TRANSPARENT);
             orbits[i].setStroke(colors[numberOfColor]);
             orbits[i].setStrokeWidth(1.0);
+
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/buttonsOnDraw.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/buttonsOnDraw.fxml"));
         root.getChildren().addAll(loader.load(), sun);
         ButtonsOnDrawController controller = loader.getController();
         controller.setModel(model);
 
         root.getChildren().addAll(circles);
 
-        scene.setFill(Color.AQUAMARINE);
-
-
         new AnimationTimer() {
             final double[] currentAngle = new double[model.getPlanetCount()];
             public void handle (long currentNanoTime) {
+                switch (model.getShowOrbitsFlag()) {
+                    case 1:
+                        /** Удаление образов планет происходит для того, чтобы
+                         * орбиты были под планетами, т.к. если они находятся поверх
+                         * образов планет, то показ информации о планетах становится
+                         * недоступным.
+                         */
+                        root.getChildren().removeAll(circles);
+                        root.getChildren().addAll(orbits);
+                        root.getChildren().addAll(circles);
+                        model.setShowOrbitsFlag(0);
+                        break;
+                    case 2:
+                        root.getChildren().removeAll(orbits);
+                        model.setShowOrbitsFlag(0);
+                        break;
+                }
+
                 for (int i = 0; i < model.getPlanetCount(); i++) {
-                    switch (model.getShowOrbitsFlag()) {
-                        case 1:
-                            root.getChildren().addAll(orbits);
-                            model.setShowOrbitsFlag(0);
-                            break;
-                        case 2:
-                            root.getChildren().removeAll(orbits);
-                            model.setShowOrbitsFlag(0);
-                            break;
-                    }
+                    final int forClick = i;
+                    circles[i].setOnMouseClicked(mouseEvent -> {
+                        try {
+                            show(model.dataBase.get(forClick));
+                        } catch (IOException ignored) {}
+                    });
 
                     if (!model.getStopFlag()) {
 
@@ -96,5 +120,14 @@ public class DrawPlanet {
 
             }
         }.start();
+    }
+
+    public void showInformation (Window window, Circle circle, Planet planet) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Информация о планете");
+        alert.setGraphic(circle);
+        alert.setHeaderText(planet.getName());
+        alert.setContentText(planet.description[0] + '\n' + planet.description[1] + '\n' + planet.description[2]);
+        alert.show();
     }
 }

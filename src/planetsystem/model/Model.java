@@ -17,12 +17,13 @@ public class Model {
     int numberOfThisPlanet = 1;
     boolean stopFlag = false;
     int showOrbitsFlag;
+    double maxRadius;
 
     String[] atmosphere = {"без атмосферы", "с атмосферой", "со слабой атмосферой"};
-    String[] climate = {"климат, непригодный для жизни, большой разброс температур", "климат, схожий" +
-            "с земным", "климат, непригодный для жизни, слишком много солнечной радиации"};
+    String[] climate = {"климат, непригодный для жизни, большой разброс температур", "климат, схожий " +
+            "с земным", "климат, непригодный для жизни, много солнечной радиации"};
     String[] conditions = {"вода занимает большую часть поверхности планеты", "вода занимает" +
-            "меньшую часть поверхности планеты", "планета не содержит воды в жидком виде", "планета не" +
+            "меньшую часть поверхности планеты", "планета не содержит воды в жидком виде", "планета не " +
             "содержит воды ни в каком-либо виде", "газовая планета"};
 
 
@@ -79,6 +80,10 @@ public class Model {
         this.bigHalfShaft = bigHalfShaft;
     }
 
+    public void setMaxRadius (double radius) {
+        this.maxRadius = radius;
+    }
+
     public String getSystemName() {
         return systemName;
     }
@@ -95,27 +100,35 @@ public class Model {
         return scaleTime;
     }
 
+    public double getMaxRadius () {
+        return maxRadius;
+    }
+
     public int getShowOrbitsFlag() {
         return showOrbitsFlag;
     }
 
     public boolean getStopFlag() {
         return stopFlag;
-    };
+    }
+
     public int getNumberOfThisPlanet () {
         return numberOfThisPlanet;
     }
-
 
     public void addPlanet(String name, long radius, double eccentricity) {
 
         double period = 2 * Math.PI * Math.sqrt((Math.pow(radius,3) * Math.pow(10,8))
                 / (6.67 * sunMass));
-
-        Planet planet = new Planet(name, radius, period, eccentricity, this, atmosphere);
+        Random random = new Random();
+        Planet planet = new Planet(name, radius, period, eccentricity, this,
+                new String[] {atmosphere[random.nextInt(3)],
+                        climate[random.nextInt(3)], conditions[random.nextInt(5)]});
         dataBase.add(planet);
         i++;
 
+        if (radius > getMaxRadius())
+            setMaxRadius(radius);
     }
 
     public int getX (int planetNumber, double angle, double coef) {

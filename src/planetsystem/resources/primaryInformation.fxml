@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planetsystem.controllers.PrimaryController">
    <children>
-      <Label layoutX="54.0" layoutY="37.0" prefHeight="42.0" prefWidth="331.0" style="-fx-background-image: url(https://i.imgur.com/5AzoLxL.gif); " text="конструктор системы" textFill="#a4a4a4">
+      <Label layoutX="54.0" layoutY="37.0" prefHeight="42.0" prefWidth="331.0" style="-fx-background-image: url(/shadow.gif); " text="конструктор системы" textFill="#a4a4a4">
          <font>
             <Font name="Verdana Pro Cond" size="35.0" />
          </font>
@@ -33,7 +33,7 @@
 
       <ImageView layoutX="688.0" layoutY="10.0">
          <image>
-            <Image url="https://i.imgur.com/imqVmwb.png" />
+            <Image url="/stars.png" />
          </image>
       </ImageView>
       <Button fx:id="continueButton" layoutX="782.0" layoutY="361.0" mnemonicParsing="false" text="Продолжить" onAction="#nextScene"/>

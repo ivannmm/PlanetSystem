@@ -8,6 +8,8 @@ import planetsystem.view.DrawPlanet;
 import planetsystem.view.Main;
 import planetsystem.view.SetInformation;
 
+import static planetsystem.view.Main.isDouble;
+
 
 public class InfAboutPlanetsController {
 
@@ -39,10 +41,10 @@ public class InfAboutPlanetsController {
     }
 
     public void nextScene() throws Exception {
-        if (!planetsName.getText().isEmpty() && Main.isNumber(radius.getText())
-                && Main.isNumber(eccentricity.getText())) {
-            if (Double.parseDouble(eccentricity.getText()) < 1 && Double.parseDouble(eccentricity.getText()) >= 0 &&
-                    Double.parseDouble(radius.getText()) > 0) {
+        if (!planetsName.getText().isEmpty() && isDouble(radius.getText()) &&
+                isDouble(eccentricity.getText()) && Double.parseDouble(eccentricity.getText()) < 1 &&
+                Double.parseDouble(eccentricity.getText()) >= 0 && Double.parseDouble(radius.getText()) > 0) {
+
                 model.addPlanet(planetsName.getText(), Integer.parseInt(radius.getText()),
                         Double.parseDouble(eccentricity.getText()));
                 if (model.getNumberOfThisPlanet() < model.getPlanetCount()) {
@@ -52,11 +54,11 @@ public class InfAboutPlanetsController {
                     DrawPlanet DP = new DrawPlanet();
                     DP.drawPlanet(stage, model);
                 }
-            } else Main.showMessage(stage.getScene().getWindow(), "Эксцентриситет орбиты должен быть не отрицательным числом " +
-                    "и меньше единицы. Минимальное расстояние должно быть числом положительным");
+
         } else {
             Main.showMessage(stage.getScene().getWindow(), "Обязательно нужно указать название планеты, " +
-                    "минимальное расстояние до солнца (число) и эксцентриситет орбиты планеты (от 0 до 1 (не включительно))" );
+                    "минимальное расстояние до солнца (число положительное) и эксцентриситет орбиты планеты (от 0 (включительно) " +
+                    "до 1 (не включительно))" );
         }
     }
 }
