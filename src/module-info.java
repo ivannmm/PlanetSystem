@@ -1,4 +1,4 @@
-module planet {
+module planetsystem {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.controls;
