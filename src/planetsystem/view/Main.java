@@ -48,7 +48,7 @@ public class Main extends Application {
 
     public static void showMessage(Window window, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Что-то пошло не так...");
+        alert.setTitle("Внимание!");
         alert.initOwner(window);
         alert.setHeaderText(null);
         alert.setContentText(message);
